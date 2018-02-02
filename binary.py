@@ -50,7 +50,7 @@ def main(argv):
 		if asciiTmp != 0:
 			word = word + str(letters[asciiTmp-1])
 			asciiTmp = 0
-	print ('O ASCII para o binario: ' + str(binary) + ' : \n' + word)
+	print ('The ASCII result to binary is: ' + str(binary) + ' : \n' + word)
 
 if __name__ == "__main__":
 	if len(sys.argv) <= 1:
