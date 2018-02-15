@@ -1,64 +1,69 @@
 import sys
 
-def binarios_error(message):
+def binary_error(message):
 	print(message)
 	sys.exit()
 
-def binarios_version():
-	print("Decodificador de Binário\nNome: binarios.py\nVersão: 1.1")
+def binary_version():
+	print("** Binary Decode **\nName: binary.py\nVersion: 1.0.1 ***")
 	sys.exit()
 
+def binary_help():
+ 	print('*** Binary Decode Help ***')
+ 	print("usage binary.py <\"<Binary Number>\">")
+ 	sys.exit(1)
+
 def main(argv):
-	letras = "A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z".split("-")
-	#binarios = "01110000 01111001 01110100 01101000 01101111 01101110"
-	#binarios = "011100000111100101110100011010000110111101101110"
-	multiplos = [16, 8, 4, 2, 1]
+	letters = "A-B-C-D-E-F-G-H-I-J-K-L-M-N-O-P-Q-R-S-T-U-V-W-X-Y-Z".split("-")
+	#binaryExample = "01110000 01111001 01110100 01101000 01101111 01101110"
+	#binaryExample = "011100000111100101110100011010000110111101101110"
+	multiples = [16, 8, 4, 2, 1]
 
-	binarios = argv
+	binary = argv
 
-	if binarios.count(' ') == 0:
+	if binary.count(' ') == 0:
 		c = 1
 		binn = []
-		for b in binarios:
+		for b in binary:
 			if c == 8:
-				binn.append(binarios[:8])
-				binarios = binarios.replace(binarios[:8], '')
+				binn.append(binary[:8])
+				binary = binary.replace(binary[:8], '')
 				c = 1
 			c += 1
-		binarios = binn
+		binary = binn
 	else:
-		binarios = binarios.split(" ")
+		binary = binary.split(" ")
 
-	indice = 0
-	for binario in binarios:
-	    binarios[indice] = binario[3:]
-	    indice += 1
+	indexx = 0
+	for binario in binary:
+	    binary[indexx] = binario[3:]
+	    indexx += 1
 
 	asciiTmp = 0
-	palavra = ""
-	for binario in binarios:
+	word = ""
+	for binario in binary:
 		if binario == "00000":
-			if palavra != "":
-				palavra = str(palavra) + " "
-		indiceMultiplo = 0
+			if word != "":
+				word = str(word) + " "
+		indexMultiple = 0
 		for bin in binario:
 			if bin == "1":
-				asciiTmp = asciiTmp + multiplos[indiceMultiplo]
-			indiceMultiplo += 1
+				asciiTmp = asciiTmp + multiples[indexMultiple]
+			indexMultiple += 1
 		if asciiTmp != 0:
-			palavra = palavra + str(letras[asciiTmp-1])
+			word = word + str(letters[asciiTmp-1])
 			asciiTmp = 0
-	print ('O ASCII para o binario: ' + str(binarios) + ' : \n' + palavra)
+	print ('The ASCII result to binary is: ' + str(binary) + ' : \n' + word)
 
 if __name__ == "__main__":
 	if len(sys.argv) <= 1:
-		binarios_error('SyntaxError: argumento esperado.\nUse binarios.py -h para ajuda')
+		binary_error('SyntaxError: Expected Argument.\nUse binary.py -h for help')
 	elif len(sys.argv) > 2:
-		binarios_error('SyntaxError: numeros de argumentos passados invalidos.\nUse binarios.py -h para ajuda')
+		binary_error('SyntaxError: Invalid Number of Arguments.\nUse binary.py -h for help')
 	elif sys.argv[1] == "-h" or sys.argv[1] == "-H":
-		print("usage binarios.py <\"<numero binario>\">")
+		print("usage binary.py <\"<binary number>\">")
 		sys.exit(1)
 	elif sys.argv[1] == "-v" or sys.argv[1] == "-V":
-		binarios_version()	
+		binary_version()	
 	else:
 		main(sys.argv[1])
